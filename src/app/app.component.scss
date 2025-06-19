@@ -1,0 +1,92 @@
+/* Archivo: src/app/app.component.scss */
+
+// Definimos un :host para que el componente en sí mismo se comporte correctamente
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; // Ocupa el 100% de la altura de la ventana
+  background-color: #f4f5f7; // Un gris muy claro para el fondo del contenido
+}
+
+// Variables de la paleta de colores para el header
+$header-bg: #18191a;
+$header-border: #2f3031;
+$text-primary: #e4e6eb;
+$text-secondary: #b0b3b8;
+$accent-color: #4b89ff;
+$font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+// Estilos del Header
+.app-header {
+  width: 100%;
+  background-color: $header-bg;
+  border-bottom: 1px solid $header-border;
+  padding: 0 24px;
+  box-sizing: border-box;
+  flex-shrink: 0; // Evita que el header se encoja
+  font-family: $font-family;
+  
+  // Contenido centrado y alineado
+  .header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1400px;
+    height: 60px;
+    margin: 0 auto;
+  }
+}
+
+// Estilos de la marca (logo y título)
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  
+  .brand-icon {
+    width: 28px;
+    height: 28px;
+    color: $accent-color;
+  }
+  
+  .brand-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: $text-primary;
+  }
+}
+
+// Estilos de la navegación
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  .nav-link {
+    color: $text-secondary;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 6px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+
+    &:hover {
+      background-color: #3a3b3c;
+      color: $text-primary;
+    }
+
+    // Estilo para el enlace activo
+    &.active {
+      color: $text-primary;
+      background-color: #303132;
+    }
+  }
+}
+
+// Estilos del área de contenido principal
+.main-content {
+  flex-grow: 1; // Ocupa todo el espacio restante
+  width: 100%;
+  overflow-y: auto; // Añade scroll solo si el contenido es más alto que el espacio
+}
