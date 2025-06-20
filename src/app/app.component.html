@@ -1,10 +1,6 @@
-<!-- Archivo: src/app/app.component.html -->
-
-<!-- Header fijo, limpio y profesional -->
 <header class="app-header">
   <div class="header-content">
     
-    <!-- Lado Izquierdo: Logo y Título -->
     <div class="header-brand">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="brand-icon">
         <path d="M11.75 2.5a.75.75 0 01.75.75V4h-1.5V3.25a.75.75 0 01.75-.75zM15 8.25a.75.75 0 01.75-.75h1.5a.75.75 0 010 1.5h-1.5a.75.75 0 01-.75-.75zM8.25 7.5a.75.75 0 000 1.5h-1.5a.75.75 0 000-1.5h1.5zM4 12a1 1 0 011 1v2.5a1 1 0 01-2 0V13a1 1 0 011-1zM20 12a1 1 0 011 1v2.5a1 1 0 11-2 0V13a1 1 0 011-1zM7 17a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zm10 0a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1z"></path>
@@ -13,19 +9,22 @@
       <span class="brand-title">{{ title }}</span>
     </div>
 
-    <!-- Lado Derecho: Menú de Navegación -->
     <nav class="header-nav">
-      <a href="#" class="nav-link active">Explorador</a>
-      <a href="#" class="nav-link">Favoritos</a>
-      <a href="#" class="nav-link">Acerca de</a>
+      <ng-container *ngIf="authService.isLoggedIn()">
+        <a routerLink="/breeds" routerLinkActive="active" class="nav-link">Explorador</a>
+        <a routerLink="/profile" routerLinkActive="active" class="nav-link">Mi Perfil</a>
+        <a (click)="logout()" class="nav-link logout-btn">Cerrar Sesión</a>
+      </ng-container>
+
+      <ng-container *ngIf="!authService.isLoggedIn()">
+        <a routerLink="/login" routerLinkActive="active" class="nav-link">Iniciar Sesión</a>
+      </ng-container>
     </nav>
 
   </div>
 </header>
 
 
-<!-- Área de contenido principal -->
-<!-- El <router-outlet> renderizará aquí tus componentes de ruta -->
 <main class="main-content">
   <router-outlet></router-outlet>
 </main>

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router'; // Importar RouterLink
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -11,25 +11,27 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AuthService } from '../../core/services/auth.service';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-register',
   standalone: true,
   imports: [
     CommonModule,
     FormsModule,
     RouterLink,
+    MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
     MatCardModule,
     MatIconModule,
     MatProgressSpinnerModule
   ],
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.scss']
 })
-export class LoginComponent {
+export class RegisterComponent {
+  name = '';
   email = '';
   password = '';
-  
+
   isLoading = false;
   errorMessage: string | null = null;
 
@@ -39,29 +41,30 @@ export class LoginComponent {
   ) { }
 
   onSubmit(): void {
-    if (!this.email || !this.password) {
-      this.errorMessage = 'Por favor, ingresa tu email y contraseña.';
+    if (!this.name || !this.email || !this.password) {
+      this.errorMessage = 'Todos los campos son obligatorios.';
       return;
     }
 
     this.isLoading = true;
     this.errorMessage = null;
 
-    const credentials = {
+    const userData = {
+      name: this.name,
       email: this.email,
       password_raw: this.password
     };
 
-    this.authService.login(credentials).subscribe({
+    this.authService.register(userData).subscribe({
       next: (response) => {
         this.isLoading = false;
-        console.log('Login exitoso:', response);
+        console.log('Registro exitoso:', response);
         this.router.navigate(['/breeds']);
       },
       error: (err) => {
         this.isLoading = false;
-        console.error('Error en el login:', err);
-        this.errorMessage = 'Email o contraseña incorrectos. Por favor, intenta de nuevo.';
+        console.error('Error en el registro:', err);
+        this.errorMessage = err.error?.message || 'Ocurrió un error en el registro. Intenta con otro email.';
       }
     });
   }

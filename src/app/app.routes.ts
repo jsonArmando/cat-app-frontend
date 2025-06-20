@@ -13,13 +13,24 @@ export const routes: Routes = [
       import('./features/login/login.component').then(c => c.LoginComponent)
   },
   {
+    path: 'register',
+    loadComponent: () =>
+      import('./features/register/register.component').then(c => c.RegisterComponent)
+  },
+  {
     path: 'breeds',
     loadComponent: () => 
       import('./features/breeds-explorer/breeds-explorer.component').then(c => c.BreedsExplorerComponent),
     canActivate: [authGuard]
   },
   {
-    path: '**', 
+    path: 'profile',
+    loadComponent: () =>
+      import('./features/profile/profile.component').then(c => c.ProfileComponent),
+    canActivate: [authGuard]
+  },
+  {
+    path: '**',
     redirectTo: 'login'
   }
 ];

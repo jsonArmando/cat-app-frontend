@@ -1,13 +1,19 @@
-<div class="login-container">
-  <mat-card class="login-card">
+<div class="register-container">
+  <mat-card class="register-card">
     <mat-card-header>
-      <mat-icon mat-card-avatar>pets</mat-icon>
-      <mat-card-title>Iniciar Sesión</mat-card-title>
-      <mat-card-subtitle>Bienvenido a Cat Explorer</mat-card-subtitle>
+      <mat-icon mat-card-avatar>person_add</mat-icon>
+      <mat-card-title>Crear una Cuenta</mat-card-title>
+      <mat-card-subtitle>Únete a Cat Explorer</mat-card-subtitle>
     </mat-card-header>
 
     <mat-card-content>
       <form (ngSubmit)="onSubmit()">
+
+        <mat-form-field appearance="outline">
+          <mat-label>Nombre Completo</mat-label>
+          <input matInput type="text" [(ngModel)]="name" name="name" required>
+          <mat-icon matSuffix>badge</mat-icon>
+        </mat-form-field>
 
         <mat-form-field appearance="outline">
           <mat-label>Email</mat-label>
@@ -26,14 +32,14 @@
         </div>
 
         <button mat-raised-button color="primary" type="submit" [disabled]="isLoading">
-          <span *ngIf="!isLoading">Ingresar</span>
+          <span *ngIf="!isLoading">Registrarse</span>
           <mat-progress-spinner *ngIf="isLoading" mode="indeterminate" diameter="24"></mat-progress-spinner>
         </button>
 
       </form>
     </mat-card-content>
     <mat-card-actions align="end">
-      <a class="register-link" routerLink="/register">¿No tienes una cuenta? Regístrate</a>
+      <a class="login-link" routerLink="/login">¿Ya tienes una cuenta? Inicia sesión</a>
     </mat-card-actions>
   </mat-card>
 </div>
